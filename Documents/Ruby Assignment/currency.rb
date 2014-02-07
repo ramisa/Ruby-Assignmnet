@@ -17,9 +17,10 @@ end
 
 #when method 'in' is called, divides itself by the currency to make conversion
 def in(currency)
-singular_currency = currency.to_s.gsub( /s$/, '')
-self / @@currencies[singular_currency]
-end
+	singular_currency = currency.to_s.gsub( /s$/, '')
+
+	self / @@currencies[singular_currency]
+	end
 end
 
 p 5.dollars.in(:euros)
