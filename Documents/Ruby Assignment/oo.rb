@@ -1,34 +1,40 @@
 class Class
-  def attr_accessor_with_history(attr)
-    attr = attr.to_s
-    attr_reader attr
-    attr_reader attr+"_history"
-    class_eval %Q{
-def #{attr}=(value)
-if(!defined?(@#{attr}_history))
-@#{attr}_history = [@#{attr}]
-end
 
-@#{attr} = value
-@#{attr}_history << value
+def attr_accessor_with_history(attr_name)
+
+attr_name = attr_name.to_s #make sure it's a string
+attr_reader attr_name #create the attribute's getter
+attr_reader attr_name+"_history" #create bar_history getter
+
+#%Q for multiline strings
+class_eval %Q{
+def #{attr_name}=(value)
+if !defined?
+@#{attr_name}_history
+@#{attr_name}_history = [@#{attr_name}]
+end
+@#{attr_name} = value
+@#{attr_name}_history << value
 end
 }
-  end
+
+
 end
+end	
 
 class Foo
-
-    attr_accessor_with_history :bar
-
+attr_accessor_with_history:bar
 end
 
+
 f = Foo.new
+f.bar = 3
+f.bar = :wowzo
+f.bar = 'boo!'
+p f.bar_history
 
-f.bar = 1
 
-f.bar = 2
 
-puts f.bar_history 
 
 
 
